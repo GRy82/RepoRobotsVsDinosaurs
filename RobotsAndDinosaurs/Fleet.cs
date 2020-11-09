@@ -10,11 +10,13 @@ namespace RobotsAndDinosaurs
     {
         List<Robot> robotFleetList;
         int LivingMembersCount;
+        string controller;
 
-        public Fleet(List<Robot> robotFleetList)
+        public Fleet(List<Robot> robotFleetList, string controller)
         {
             this.robotFleetList = robotFleetList;
             this.LivingMembersCount = robotFleetList.Count;
+            this.controller = controller;
         }
     }
 }

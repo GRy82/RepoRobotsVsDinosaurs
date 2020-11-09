@@ -17,5 +17,12 @@ namespace RobotsAndDinosaurs
             this.herd = herd;
             this.fleet = fleet;
         }
+
+        public void runBattle()
+        {
+
+        }
+
+
     }
 }
