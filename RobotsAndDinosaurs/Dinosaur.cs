@@ -13,9 +13,9 @@ namespace RobotsAndDinosaurs
         int energy;
         int attackPower;
 
-        public Dinosaur()
+        public Dinosaur(int energy)
         {
-
+            this.energy = energy;   
         }
 
         Attack()

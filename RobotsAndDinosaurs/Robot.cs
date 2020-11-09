@@ -13,9 +13,9 @@ namespace RobotsAndDinosaurs
         int powerLevel;
         Weapon weapon;
 
-        public Robot()
+        public Robot(int powerLevel)
         {
-
+            this.powerLevel = powerLevel;
         }
 
         Attack()
