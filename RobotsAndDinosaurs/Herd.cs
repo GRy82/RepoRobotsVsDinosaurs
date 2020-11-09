@@ -8,5 +8,7 @@ namespace RobotsAndDinosaurs
 {
     class Herd
     {
+        List<Dinosaur> dinosaurHerdList;
+        int LivingMembersCount;
     }
 }

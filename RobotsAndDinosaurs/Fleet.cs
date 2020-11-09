@@ -8,5 +8,8 @@ namespace RobotsAndDinosaurs
 {
     class Fleet
     {
+        List<Robot> robotFleetList;
+        int LivingMembersCount;
+
     }
 }

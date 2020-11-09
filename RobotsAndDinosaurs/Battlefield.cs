@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace RobotsAndDinosaurs
 {
+
     class Battlefield
     {
+        Herd herd;
+        Fleet fleet;
     }
 }
