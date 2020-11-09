@@ -8,15 +8,37 @@ namespace RobotsAndDinosaurs
 {
     class Herd
     {
-        List<Dinosaur> dinosaurHerdList;
-        int livingMembersCount;
-        string controller;
+        public List<Dinosaur> dinosaurHerdList;
+        public int livingMembersCount;
+        public string controller;
 
         public Herd(List<Dinosaur> dinosaurHerdList, string controller)
         {
             this.dinosaurHerdList = dinosaurHerdList;
             this.livingMembersCount = dinosaurHerdList.Count;
             this.controller = controller;
+        }
+
+        public string DetermineName(Dinosaur dinosaurObject)
+        {
+            int check = 0;
+            foreach (Dinosaur dinosaur in dinosaurHerdList)
+            {
+                if (dinosaurObject.type != dinosaur.name) {
+                    check++;
+                }
+            }
+            string dinosaurName = dinosaurObject.type;
+            
+           if (check < dinosaurHerdList.Count) {
+                dinosaurName += Convert.ToString(dinosaurHerdList.Count - check);
+           }
+            return dinosaurName;
+        }
+
+        public Attack()
+        {
+
         }
     }
 }

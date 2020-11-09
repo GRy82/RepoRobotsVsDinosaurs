@@ -8,13 +8,15 @@ namespace RobotsAndDinosaurs
 {
     class Dinosaur
     {
-        string type;
-        int health;
-        int energy;
-        int attackPower;
+        public string type;
+        public int health;
+        public int energy;
+        public int attackPower;
+        public string name;
 
         public Dinosaur(int energy, string type)
         {
+            this.name = null;
             this.energy = energy;
             this.type = type;
             switch (this.type) {
@@ -31,6 +33,11 @@ namespace RobotsAndDinosaurs
                     this.attackPower = 10;
                     break;
             }
+        }
+
+        string DetermineName()
+        {
+            return
         }
 
         Attack()

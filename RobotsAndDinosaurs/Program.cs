@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,9 +49,9 @@ namespace RobotsAndDinosaurs
             Weapon weaponTwo = new Weapon(weaponTypes[1]);
             Weapon weaponThree = new Weapon(weaponTypes[2]);
 
-            Robot robotOne = new Robot(mana, weaponOne);
-            Robot robotTwo = new Robot(mana, weaponTwo);
-            Robot robotThree = new Robot(mana, weaponThree);
+            Robot robotOne = new Robot(mana, weaponOne, "ModelA");
+            Robot robotTwo = new Robot(mana, weaponTwo, "ModelB");
+            Robot robotThree = new Robot(mana, weaponThree, "ModelC");
             List<Robot> robotList = new List<Robot> { robotOne, robotTwo, robotThree };
 
             Dinosaur dinosaurOne = new Dinosaur(mana, dinosaurTypes[0]);
@@ -60,6 +61,10 @@ namespace RobotsAndDinosaurs
 
             Fleet fleet = new Fleet(robotList, robotsController);
             Herd herd = new Herd(dinosaurList, dinosaursController);
+
+            foreach (Dinosaur dinosaur in dinosaurList) {
+                dinosaur.name = herd.DetermineName(dinosaur);
+            }
 
             Battlefield battlefield = new Battlefield(herd, fleet);
             return battlefield;
@@ -117,9 +122,7 @@ namespace RobotsAndDinosaurs
                         break;
                 }
             }
-
             return dinoTypes;
-
         }
 
         public static List<string> RobotWeaponSelection()
