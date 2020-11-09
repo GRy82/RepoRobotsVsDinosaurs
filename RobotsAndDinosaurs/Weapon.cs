@@ -8,8 +8,8 @@ namespace RobotsAndDinosaurs
 {
     class Weapon
     {
-        string type;
-        int attackPower;
+        public string type;
+        public int attackPower;
         public Weapon(string type)
         {
             this.type = type;
