@@ -14,11 +14,14 @@ namespace RobotsAndDinosaurs
         {
             this.type = type;
             switch (this.type) {
-                case "laserGun":
+                case "Laser Gun":
                     this.attackPower = 10;
                     break;
-                case "energySword":
+                case "Energy Sword":
                     this.attackPower = 20;
+                    break;
+                case "Self-Destruct Switch":
+                    this.attackPower = 40;
                     break;
             }
         }

@@ -24,30 +24,38 @@ namespace RobotsAndDinosaurs
                     playerTypesOrWeapons = RobotWeaponSelection();
                     computerTypesOrWeapons = RandomTypeAssignment("Dinosaurs");
                 }
-                Battlefield battlefield = LoadObjects(chosenTeam);
+                Battlefield battlefield = LoadObjects(chosenTeam, playerTypesOrWeapons, computerTypesOrWeapons);
                 battlefield.runBattle();
             }
         }
 
-        public static Battlefield LoadObjects(string chosenTeam)
+        public static Battlefield LoadObjects(string chosenTeam, List<string> playerTypesOrWeapons, List<string> computerTypesOrWeapons)
         {
             int mana = 100;
             string dinosaursController = "Human";
             string robotsController = "AI";
+            List<string> weaponTypes = computerTypesOrWeapons;
+            List<string> dinosaurTypes = playerTypesOrWeapons;
 
             if (chosenTeam == "Robots") {
                 robotsController = "Human";
                 dinosaursController = "AI";
+                weaponTypes = playerTypesOrWeapons;
+                dinosaurTypes = computerTypesOrWeapons;
             }
 
-            Robot robotOne = new Robot(mana);
-            Robot robotTwo = new Robot(mana);
-            Robot robotThree = new Robot(mana);
+            Weapon weaponOne = new Weapon(weaponTypes[0]);
+            Weapon weaponTwo = new Weapon(weaponTypes[1]);
+            Weapon weaponThree = new Weapon(weaponTypes[2]);
+
+            Robot robotOne = new Robot(mana, weaponOne);
+            Robot robotTwo = new Robot(mana, weaponTwo);
+            Robot robotThree = new Robot(mana, weaponThree);
             List<Robot> robotList = new List<Robot> { robotOne, robotTwo, robotThree };
 
-            Dinosaur dinosaurOne = new Dinosaur(mana);
-            Dinosaur dinosaurTwo = new Dinosaur(mana);
-            Dinosaur dinosaurThree = new Dinosaur(mana);
+            Dinosaur dinosaurOne = new Dinosaur(mana, dinosaurTypes[0]);
+            Dinosaur dinosaurTwo = new Dinosaur(mana, dinosaurTypes[1]);
+            Dinosaur dinosaurThree = new Dinosaur(mana, dinosaurTypes[2]);
             List<Dinosaur> dinosaurList = new List<Dinosaur> { dinosaurOne, dinosaurTwo, dinosaurThree };
 
             Fleet fleet = new Fleet(robotList, robotsController);
@@ -140,25 +148,27 @@ namespace RobotsAndDinosaurs
 
             return roboWeapons;
         }
-    }
 
-    public static List<string> RandomTypeAssignment(string team)
-    {
-        List<string> randomTypes;
-        List<string> computerTypes = new List<string> { };
-        Random rand = new Random();
-        if (team == "Dinosaurs") {
-            randomTypes = new List<string> { "T-Rex", "Velociraptor", "Brachiosaurus"};
-        }
-        else {
-            randomTypes = new List<string> { "Energy Sword", "Laser Gun", "Self-Destruct Switch" };
-        }
-        for (int i = 0; i < 3; i++)
+        public static List<string> RandomTypeAssignment(string team)
         {
-            int randomType = rand.Next(2);
-            computerTypes.Add(randomTypes[randomType]);
-        }
+            List<string> randomTypes;
+            List<string> computerTypes = new List<string> { };
+            Random rand = new Random();
+            if (team == "Dinosaurs")
+            {
+                randomTypes = new List<string> { "T-Rex", "Velociraptor", "Brachiosaurus" };
+            }
+            else
+            {
+                randomTypes = new List<string> { "Energy Sword", "Laser Gun", "Self-Destruct Switch" };
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                int randomType = rand.Next(2);
+                computerTypes.Add(randomTypes[randomType]);
+            }
 
-        return computerTypes;
+            return computerTypes;
+        }
     }
 }

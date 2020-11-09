@@ -13,9 +13,12 @@ namespace RobotsAndDinosaurs
         int powerLevel;
         Weapon weapon;
 
-        public Robot(int powerLevel)
+        public Robot(int powerLevel, Weapon weapon, string name)
         {
             this.powerLevel = powerLevel;
+            this.weapon = weapon;
+            this.health = 100;
+            this.name = name;
         }
 
         Attack()
