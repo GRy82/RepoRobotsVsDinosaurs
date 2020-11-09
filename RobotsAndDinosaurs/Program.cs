@@ -11,6 +11,14 @@ namespace RobotsAndDinosaurs
     {
         static void Main(string[] args)
         {
+            while (MainMenu()) {
+                Battlefield battlefield = LoadObjects();
+                battlefield.runBattle();
+            }
+        }
+
+        public static Battlefield LoadObjects()
+        {
             Robot robotOne = new Robot();
             Robot robotTwo = new Robot();
             Robot robotThree = new Robot();
@@ -25,21 +33,20 @@ namespace RobotsAndDinosaurs
             Herd herd = new Herd(dinosaurList);
 
             Battlefield battlefield = new Battlefield(herd, fleet);
+            return battlefield;
+        }
 
-            List<string> mainMenuList = new List<string> {"Start New Battle", "Exit Game" }; //main menu options stored as strings.
+        public static bool MainMenu()
+        {
+            List<string> mainMenuList = new List<string> { "Start New Battle", "Exit Game" }; //main menu options stored as strings.
             ConsoleOptionsInterface mainMenu = new ConsoleOptionsInterface(mainMenuList, true); //menu generated through this menu object.
-
-            int mainMenuOptionInput = 1;
-            while (mainMenuOptionInput == 1) {
-                Console.WriteLine("Welcome to Robots And Dinosaurs! by GRy-Dev");
-                mainMenuOptionInput = mainMenu.Launch();
-                if (mainMenuOptionInput == 2) {
-                    Environment.Exit(-1);
-                }
-                else {
-                    Battlefield.runGame();
-                }
+            
+            Console.WriteLine("Welcome to Robots And Dinosaurs! by GRy-Dev");
+            int optionNumber = mainMenu.Launch();
+            if (optionNumber == 1) {
+                return true;
             }
+            return false;
         }
     }
 }

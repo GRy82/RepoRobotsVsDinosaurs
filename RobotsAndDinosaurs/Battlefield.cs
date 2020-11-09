@@ -11,5 +11,11 @@ namespace RobotsAndDinosaurs
     {
         Herd herd;
         Fleet fleet;
+
+        public Battlefield(Herd herd, Fleet fleet)
+        {
+            this.herd = herd;
+            this.fleet = fleet;
+        }
     }
 }
