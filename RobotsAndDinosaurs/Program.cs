@@ -142,9 +142,23 @@ namespace RobotsAndDinosaurs
         }
     }
 
-        public static List<string> RandomTypeAssignment(string team)
-        {
-
+    public static List<string> RandomTypeAssignment(string team)
+    {
+        List<string> randomTypes;
+        List<string> computerTypes = new List<string> { };
+        Random rand = new Random();
+        if (team == "Dinosaurs") {
+            randomTypes = new List<string> { "T-Rex", "Velociraptor", "Brachiosaurus"};
         }
+        else {
+            randomTypes = new List<string> { "Energy Sword", "Laser Gun", "Self-Destruct Switch" };
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            int randomType = rand.Next(2);
+            computerTypes.Add(randomTypes[randomType]);
+        }
+
+        return computerTypes;
     }
 }
