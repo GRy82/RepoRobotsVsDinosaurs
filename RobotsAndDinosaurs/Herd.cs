@@ -10,5 +10,11 @@ namespace RobotsAndDinosaurs
     {
         List<Dinosaur> dinosaurHerdList;
         int LivingMembersCount;
+
+        public Herd(List<Dinosaur> dinosaurHerdList)
+        {
+            this.dinosaurHerdList = dinosaurHerdList;
+            this.LivingMembersCount = dinosaurHerdList.Count;
+        }
     }
 }
