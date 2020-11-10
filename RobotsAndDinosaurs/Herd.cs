@@ -106,6 +106,7 @@ namespace RobotsAndDinosaurs
         {
             List<Dinosaur> livingMembers = new List<Dinosaur>{ };
             Target -= 1;
+            bool newDeath = false;
             foreach (Dinosaur dinosaur in dinosaurHerdList)
             {
                 if (dinosaur.health > 0)
@@ -117,16 +118,19 @@ namespace RobotsAndDinosaurs
             if (livingMembers[Target].health < 0) {
                 livingMembers[Target].health = 0;
                 livingMembersCount -= 1;
-                Console.WriteLine(livingMembers[Target].name + " has been killed.\n");
+                newDeath = true;
             }
-            PrintAttackResult(incomingDamage, livingMembers[Target].name);
+
+            PrintAttackResult(incomingDamage, livingMembers[Target].name, newDeath);
         }
 
-        public void PrintAttackResult(double damageDone, string targetName)
+        public void PrintAttackResult(double damageDone, string targetName, bool newDeath)
         {
             Console.Clear();
-            Console.WriteLine(targetName + " was attacked for " + damageDone + " damage\n\n");
- 
+            Console.WriteLine(targetName + " was attacked for " + damageDone + " damage\n");
+            if (newDeath == true) {
+                Console.WriteLine(targetName + " has been killed.\n\n");
+            }
         }
 
 
