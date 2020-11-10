@@ -125,14 +125,14 @@ namespace RobotsAndDinosaurs
 
         public static List<string> RobotWeaponSelection()
         {
-            List<string> roboTypesMenuList = new List<string> { "Energy Sword", "Laser Gun", "Self-Destruct Switch" }; //menu options stored as strings.
+            List<string> roboTypesMenuList = new List<string> { "Energy Sword", "Laser Gun", "Flame Thrower" }; //menu options stored as strings.
             ConsoleOptionsInterface roboTypesMenu = new ConsoleOptionsInterface(roboTypesMenuList, false); //menu generated through this menu object.
 
             List<string> roboWeapons = new List<string> { };
 
             Console.WriteLine("Each the 3 robots in your fleet requires a weapon.");
             for (int i = 0; i < 3; i++) {
-                Console.WriteLine("Choose weapon for Robot #" + i + 1);
+                Console.WriteLine("Choose weapon for Robot #" + (i + 1));
                 int weaponChoice = roboTypesMenu.Launch();
                 switch (weaponChoice) {
                     case 1:
@@ -142,7 +142,7 @@ namespace RobotsAndDinosaurs
                         roboWeapons.Add("Laser Gun");
                         break;
                     case 3:
-                        roboWeapons.Add("Self-Destruct");
+                        roboWeapons.Add("Flame Thrower");
                         break;
                 }
             }
@@ -161,7 +161,7 @@ namespace RobotsAndDinosaurs
             }
             else
             {
-                randomTypes = new List<string> { "Energy Sword", "Laser Gun", "Self-Destruct" };
+                randomTypes = new List<string> { "Energy Sword", "Laser Gun", "Flame Thrower" };
             }
             for (int i = 0; i < 3; i++)
             {

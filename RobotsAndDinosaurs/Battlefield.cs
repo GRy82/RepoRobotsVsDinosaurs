@@ -35,22 +35,32 @@ namespace RobotsAndDinosaurs
         {
             Random rand = new Random();
             int firstAttack = rand.Next(1);//Randomizes who attacks first.
-            firstAttack = 0;
-            string lastAttacking = null;
+            string lastAttacking = "Dinosaurs";
             if (firstAttack == 0) {
                 lastAttacking = "Robots";
             }
             while (herd.livingMembersCount > 0 && fleet.livingMembersCount > 0)
             {
                 DisplayStaging();
+                int target;
                 if (lastAttacking == "Robots") {
-                    int target = herd.SelectTarget(fleet);
+                    if (herd.controller == "Human") {
+                        target = herd.SelectTarget(fleet);
+                    }
+                    else {
+                        target = herd.AutomatedTargetSelection(fleet);
+                    }
                     double attack = herd.Attack(target);
                     fleet.TakeDamage(attack, target);
                     lastAttacking = "Dinosaurs";
                 }
                 else if (lastAttacking == "Dinosaurs") {
-                    int target = fleet.SelectTarget(herd);
+                    if (fleet.controller == "Human") {
+                        target = fleet.SelectTarget(herd);
+                    }
+                    else {
+                        target = fleet.AutomatedTargetSelection(herd);
+                    }
                     double attack = fleet.Attack(target);
                     herd.TakeDamage(attack, target);
                     lastAttacking = "Robots";
@@ -108,13 +118,17 @@ namespace RobotsAndDinosaurs
             for (int l = 0; l < herd.dinosaurHerdList.Count; l++) {
                 double tenthOftotalHealth = herd.dinosaurHerdList[l].healthCapacity / 10;
                 double dinoHealthBar = herd.dinosaurHerdList[l].health / tenthOftotalHealth;
+                if (herd.dinosaurHerdList[l].health < 5 && herd.dinosaurHerdList[l].health > 0)
+                {
+                    dinoHealthBar = 1;
+                }
                 dinoHealthBar = Math.Round(dinoHealthBar);
                 dinoHealthBars.Add(dinoHealthBar);
             }
             //string to be added to and eventually printed.
             string dinosaurHealthString = null; 
             //construct string.
-            for (int i = 0; i < dinoHealthBars.Count; i++) {
+            for (int i = 0; i < dinoHealthBars.Count; i++) {           
                 double afterSpace = 10 - dinoHealthBars[i];
                 dinosaurHealthString += " |";
                 for (int j = 0; j < dinoHealthBars[i]; j++) {
@@ -131,6 +145,10 @@ namespace RobotsAndDinosaurs
             {
                 double tenthOftotalHealth = 10;
                 double roboHealthBar = fleet.robotFleetList[l].health / tenthOftotalHealth;
+                if (fleet.robotFleetList[l].health < 5 && fleet.robotFleetList[l].health > 0)
+                {
+                    roboHealthBar = 1;
+                }
                 roboHealthBar = Math.Round(roboHealthBar);
                 roboHealthBars.Add(roboHealthBar);
             }

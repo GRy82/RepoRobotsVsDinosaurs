@@ -19,7 +19,7 @@ namespace RobotsAndDinosaurs
             this.robotFleetList = robotFleetList;
             this.livingMembersCount = robotFleetList.Count;
             this.controller = controller;
-            this.currentAttacker = robotFleetList[0];
+            this.currentAttacker = robotFleetList[robotFleetList.Count - 1];
         }
 
         public double Attack(int opponentSelected)
@@ -28,6 +28,36 @@ namespace RobotsAndDinosaurs
             return attack;
         }
 
+        public int AutomatedTargetSelection(Herd herd)
+        {
+            Random rand = new Random();
+            double leastHealth = 100;
+            Dinosaur target;
+            int targetIndex = 0;
+            int totalLiving = 0;
+            foreach (Dinosaur dinosaur in herd.dinosaurHerdList)
+            {
+                if (dinosaur.health > 0)
+                {
+                    totalLiving++;
+                    if (dinosaur.health < leastHealth)
+                    {
+                        leastHealth = dinosaur.health;
+                        target = dinosaur;
+                        targetIndex++; //not actual index, but "Living index"
+                    }
+                }
+            }
+            if (leastHealth == 100)
+            {
+                targetIndex = rand.Next(1, totalLiving + 1);
+                return targetIndex;
+            }
+            else
+            {
+                return targetIndex;
+            }
+        }
 
         public int SelectTarget(Herd herd)
         {
@@ -80,14 +110,21 @@ namespace RobotsAndDinosaurs
                 }
             }
             robotFleetList[Target].health -= incomingDamage;
+            if (robotFleetList[Target].health < 0) {
+                robotFleetList[Target].health = 0;
+            }
             PrintAttackResult(incomingDamage, robotFleetList[Target].name);
         }
         
         public void PrintAttackResult(double damageDone, string targetName)
         {
             Console.Clear();
-            Console.WriteLine(targetName+ " was attacked for " + damageDone+ " damage");
-
+            Console.WriteLine(targetName+ " was attacked for " + damageDone+ " damage\n\n");
+            if (controller == "AI")
+            {
+                Console.WriteLine("Press 'enter' to continue...");
+                Console.ReadLine();
+            }
         }
     }
 }
