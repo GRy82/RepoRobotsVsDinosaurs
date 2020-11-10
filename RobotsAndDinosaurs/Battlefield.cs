@@ -34,19 +34,21 @@ namespace RobotsAndDinosaurs
         public void RunBattle()
         {
             Random rand = new Random();
-            int firstAttack = rand.Next(1); //Randomizes who attacks first.
+            int firstAttack = rand.Next(1);//Randomizes who attacks first.
+            firstAttack = 0;
             string lastAttacking = null;
             if (firstAttack == 0) {
                 lastAttacking = "Robots";
             }
             while (herd.livingMembersCount > 0 && fleet.livingMembersCount > 0)
             {
+                DisplayStaging();
                 if (lastAttacking == "Robots") {
                     herd.Attack(fleet);
                     lastAttacking = "Dinosaurs";
                 }
                 else if (lastAttacking == "Dinosaurs") {
-                    fleet.Attack(herd);
+                    //fleet.Attack(herd);
                     lastAttacking = "Robots";
                 }
             }
@@ -54,7 +56,7 @@ namespace RobotsAndDinosaurs
         }
         //------------------------------------------------------------------------------------
         //------------------------------------------------------------------------------------
-       
+      
 
         //------------------------------------------------------------------------------------
         //------------------------------------------------------------------------------------

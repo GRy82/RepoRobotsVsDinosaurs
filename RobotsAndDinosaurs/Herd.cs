@@ -13,7 +13,6 @@ namespace RobotsAndDinosaurs
         public int livingMembersCount;
         public string controller;
         public Dinosaur currentAttacker;
-        public Fleet opponentFleet;
 
         public Herd(List<Dinosaur> dinosaurHerdList, string controller)
         {
@@ -30,12 +29,12 @@ namespace RobotsAndDinosaurs
             Console.WriteLine("It is now " + currentAttacker.name + "'s turn to attack. Choose their target.");
             List<string> opponentNames = GetRobotNames(fleet);
             ConsoleOptionsInterface targetsMenu = new ConsoleOptionsInterface(opponentNames, false);
-
+            int opponentSelected = targetsMenu.Launch();
         }
 
         public List<string> GetRobotNames(Fleet fleet)
         {
-            List<string> opponentNames = new List<string>;
+            List<string> opponentNames = new List<string> { };
             foreach(Robot robot in fleet.robotFleetList)
             {
                 if (robot.health > 0)
