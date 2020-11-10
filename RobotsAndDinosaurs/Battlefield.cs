@@ -44,11 +44,15 @@ namespace RobotsAndDinosaurs
             {
                 DisplayStaging();
                 if (lastAttacking == "Robots") {
-                    herd.Attack(fleet);
+                    int target = herd.SelectTarget(fleet);
+                    double attack = herd.Attack(target);
+                    fleet.TakeDamage(attack, target);
                     lastAttacking = "Dinosaurs";
                 }
                 else if (lastAttacking == "Dinosaurs") {
-                    //fleet.Attack(herd);
+                    int target = fleet.SelectTarget(herd);
+                    double attack = fleet.Attack(target);
+                    herd.TakeDamage(attack, target);
                     lastAttacking = "Robots";
                 }
             }

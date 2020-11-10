@@ -9,10 +9,10 @@ namespace RobotsAndDinosaurs
     class Dinosaur
     {
         public string type;
-        public int health;
-        public int healthCapacity;
-        public int energy;
-        public int attackPower;
+        public double health;
+        public double healthCapacity;
+        public double energy;
+        public double attackPower;
         public string name;
 
         public Dinosaur(int energy, string type)
@@ -38,8 +38,19 @@ namespace RobotsAndDinosaurs
             this.health = this.healthCapacity;
         }
 
-      
 
-       
+        public double Attack(int opponentSelected)
+        {
+            Random randAttack = new Random();
+            double randomDeviation = attackPower * .15;
+            randomDeviation = Math.Round(randomDeviation);
+            int lowerLimit = Convert.ToInt32(attackPower - randomDeviation);
+            int upperLimit = Convert.ToInt32(attackPower + randomDeviation);
+            double resultantAttack = randAttack.Next(lowerLimit, upperLimit);
+            return resultantAttack;
+        }
+
+
+
     }
 }

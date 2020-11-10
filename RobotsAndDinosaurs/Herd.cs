@@ -23,13 +23,21 @@ namespace RobotsAndDinosaurs
         }
 
 
-        public void Attack(Fleet fleet)
+        public double Attack(int opponentSelected)
+        {
+            double attack = currentAttacker.Attack(opponentSelected);
+            return attack;
+        }
+
+
+        public int SelectTarget(Fleet fleet)
         {
             currentAttacker = DetermineAttacker(dinosaurHerdList.IndexOf(currentAttacker));
             Console.WriteLine("It is now " + currentAttacker.name + "'s turn to attack. Choose their target.");
             List<string> opponentNames = GetRobotNames(fleet);
             ConsoleOptionsInterface targetsMenu = new ConsoleOptionsInterface(opponentNames, false);
             int opponentSelected = targetsMenu.Launch();
+            return opponentSelected;
         }
 
         public List<string> GetRobotNames(Fleet fleet)
@@ -60,6 +68,29 @@ namespace RobotsAndDinosaurs
             }
             return dinosaurHerdList[dinosaurIndex];
         }
+
+        public void TakeDamage(double incomingDamage, int Target)
+        {
+            List<Dinosaur> livingMembers = new List<Dinosaur>{ };
+            Target -= 1;
+            foreach (Dinosaur dinosaur in dinosaurHerdList)
+            {
+                if (dinosaur.health > 0)
+                {
+                    livingMembers.Add(dinosaur);
+                }
+            }
+            dinosaurHerdList[Target].health -= incomingDamage;
+            PrintAttackResult(incomingDamage, dinosaurHerdList[Target].name);
+        }
+
+        public void PrintAttackResult(double damageDone, string targetName)
+        {
+            Console.Clear();
+            Console.WriteLine(targetName + " was attacked for " + damageDone + " damage");
+        }
+
+
         //If multiple dinosaurs of same type exist, eg. 3 T-Rexes, they'll be named T-Rex, T-Rex1, T-Rex2
         public void DetermineNames()
         {
