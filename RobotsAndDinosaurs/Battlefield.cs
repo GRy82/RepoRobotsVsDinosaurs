@@ -11,12 +11,11 @@ namespace RobotsAndDinosaurs
 
     class Battlefield
     {
-        Herd herd;
-        Fleet fleet;
+        public Herd herd;
+        public Fleet fleet;
         public string leftTeam;
         public string rightTeam;
-        
-
+        public int totalLivingEntities;
         public Battlefield(Herd herd, Fleet fleet)
         {
             this.herd = herd;
@@ -29,47 +28,33 @@ namespace RobotsAndDinosaurs
                 this.leftTeam = "    Robots    ";
                 this.rightTeam = "   Dinosaurs  ";
             }
+            this.totalLivingEntities = herd.livingMembersCount + fleet.livingMembersCount;
         }
 
         public void RunBattle()
         {
             Random rand = new Random();
             int firstAttack = rand.Next(1); //Randomizes who attacks first.
-            int turn = 0; //keeps track of who's turn it is. Odd number represents turns of first attacker. 
+            string lastAttacking = null;
+            if (firstAttack == 0) {
+                lastAttacking = "Robots";
+            }
             while (herd.livingMembersCount > 0 && fleet.livingMembersCount > 0)
             {
-                string nowAttacking = DetermineTurn(turn, firstAttack);
-                if (nowAttacking == "Dinosaurs") {
-                    herd.Attack();
+                if (lastAttacking == "Robots") {
+                    herd.Attack(fleet);
+                    lastAttacking = "Dinosaurs";
                 }
-                else if (nowAttacking == "Robots") {
-                    fleet.Attack();
+                else if (lastAttacking == "Dinosaurs") {
+                    fleet.Attack(herd);
+                    lastAttacking = "Robots";
                 }
-                turn++;
             }
             DisplayResultsModule();
         }
         //------------------------------------------------------------------------------------
         //------------------------------------------------------------------------------------
-        string DetermineTurn(int turn, int firstAttack)
-        {
-            if (firstAttack == 0)
-            {
-                if (turn % 2 == 0)
-                {
-                    return "Dinosaurs";
-                }
-                 return "Robots";    
-            }
-            else
-            {
-                if (turn % 2 == 0)
-                {
-                    return "Robots";
-                }
-                return "Dinosaurs";
-            }   
-        }
+       
 
         //------------------------------------------------------------------------------------
         //------------------------------------------------------------------------------------
