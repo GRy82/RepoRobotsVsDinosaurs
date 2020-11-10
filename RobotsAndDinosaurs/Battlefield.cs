@@ -48,6 +48,8 @@ namespace RobotsAndDinosaurs
                         target = herd.SelectTarget(fleet);
                     }
                     else {
+                        Console.WriteLine("Press 'enter' to continue...");
+                        Console.ReadLine();
                         target = herd.AutomatedTargetSelection(fleet);
                     }
                     double attack = herd.Attack(target);
@@ -59,6 +61,8 @@ namespace RobotsAndDinosaurs
                         target = fleet.SelectTarget(herd);
                     }
                     else {
+                        Console.WriteLine("Press 'enter' to continue...");
+                        Console.ReadLine();
                         target = fleet.AutomatedTargetSelection(herd);
                     }
                     double attack = fleet.Attack(target);
@@ -223,7 +227,7 @@ namespace RobotsAndDinosaurs
         {
             rowName = Centering(rowName);
             Console.Write(rowName);
-            if (leftTeam == "Dinosaurs") {
+            if (herd.controller == "Human") {
                 Console.WriteLine(stringDino + stringRobo);
             }
             else {
@@ -235,7 +239,18 @@ namespace RobotsAndDinosaurs
         //------------------------------------------------------------------------------------
         void DisplayResultsModule()
         {
+            string winningTeam = "Dinosaurs";
+            string extraPhrase = "For the dinosaurs, it was a walk in the jurassic park. The robots will require expensive repairs.\n\n";
+            if (herd.livingMembersCount == 0)
+            {
+                winningTeam = "Robots";
+                extraPhrase = "Look at them all doing 'The Robot' and 'The Robo-boogie' while the losing team nurses their dino-sores.\n\n";
+            }
+            Console.WriteLine("The winning team is the " + winningTeam + "\n");
+            Console.WriteLine(extraPhrase);
 
+            Console.WriteLine("Press 'enter' to continue...");
+            Console.ReadLine();
         }
         //------------------------------------------------------------------------------------
         //------------------------------------------------------------------------------------

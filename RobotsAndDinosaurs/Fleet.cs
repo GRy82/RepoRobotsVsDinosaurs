@@ -24,7 +24,7 @@ namespace RobotsAndDinosaurs
 
         public double Attack(int opponentSelected)
         {
-            double attack = currentAttacker.Attack(opponentSelected);
+            double attack = currentAttacker.Attack();
             return attack;
         }
 
@@ -109,22 +109,19 @@ namespace RobotsAndDinosaurs
                     livingMembers.Add(robot);
                 }
             }
-            robotFleetList[Target].health -= incomingDamage;
-            if (robotFleetList[Target].health < 0) {
-                robotFleetList[Target].health = 0;
+            livingMembers[Target].health -= incomingDamage;
+            if (livingMembers[Target].health < 0) {
+                livingMembers[Target].health = 0;
+                livingMembersCount -= 1;
             }
-            PrintAttackResult(incomingDamage, robotFleetList[Target].name);
+            PrintAttackResult(incomingDamage, livingMembers[Target].name);
         }
         
         public void PrintAttackResult(double damageDone, string targetName)
         {
             Console.Clear();
             Console.WriteLine(targetName+ " was attacked for " + damageDone+ " damage\n\n");
-            if (controller == "AI")
-            {
-                Console.WriteLine("Press 'enter' to continue...");
-                Console.ReadLine();
-            }
+          
         }
     }
 }

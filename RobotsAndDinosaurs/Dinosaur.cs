@@ -39,7 +39,7 @@ namespace RobotsAndDinosaurs
         }
 
 
-        public double Attack(int opponentSelected)
+        public double Attack()
         {
             Random randAttack = new Random();
             double randomDeviation = attackPower * .15;

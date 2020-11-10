@@ -23,7 +23,7 @@ namespace RobotsAndDinosaurs
             this.name = name;
         }
 
-        public double Attack(int opponentSelected)
+        public double Attack()
         {
             Random randAttack = new Random();
             double randomDeviation = weapon.attackPower * .15;
