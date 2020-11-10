@@ -20,7 +20,7 @@ namespace RobotsAndDinosaurs
                 case "Energy Sword":
                     this.attackPower = 20;
                     break;
-                case "Self-Destruct Switch":
+                case "Self-Destruct":
                     this.attackPower = 40;
                     break;
             }

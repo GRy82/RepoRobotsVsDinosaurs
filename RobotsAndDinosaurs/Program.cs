@@ -62,9 +62,7 @@ namespace RobotsAndDinosaurs
             Fleet fleet = new Fleet(robotList, robotsController);
             Herd herd = new Herd(dinosaurList, dinosaursController);
 
-            foreach (Dinosaur dinosaur in dinosaurList) {
-                dinosaur.name = herd.DetermineName(dinosaur); //assign dinosaurs names.
-            }
+            herd.DetermineNames(); //assign dinosaurs names.
 
             Battlefield battlefield = new Battlefield(herd, fleet);
             return battlefield;
@@ -167,7 +165,7 @@ namespace RobotsAndDinosaurs
             }
             for (int i = 0; i < 3; i++)
             {
-                int randomType = rand.Next(2);
+                int randomType = rand.Next(3);
                 computerTypes.Add(randomTypes[randomType]);
             }
 

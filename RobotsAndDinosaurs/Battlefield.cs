@@ -98,6 +98,7 @@ namespace RobotsAndDinosaurs
             string[] attributeHeaders = new string[4] { "Name", "Weapon/type", "Energy", "Attack Power" };
             
             DisplayAttributes(attributeHeaders, dinoAttributes, roboAttributes);
+            Console.WriteLine("\n");
             
         }
         //Dinosaur herd  and robot fleet health bar creation and display.
