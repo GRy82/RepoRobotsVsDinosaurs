@@ -34,34 +34,41 @@ namespace RobotsAndDinosaurs
         public void RunBattle()
         {
             Random rand = new Random();
-            int firstAttack = rand.Next(1);
-            int turn = 1; //keeps track of who's turn it is. Odd number represents turns of first attacker. 
+            int firstAttack = rand.Next(1); //Randomizes who attacks first.
+            int turn = 0; //keeps track of who's turn it is. Odd number represents turns of first attacker. 
             while (herd.livingMembersCount > 0 && fleet.livingMembersCount > 0)
             {
-                if (turn == 10) {
-                    turn = 1;
+                string nowAttacking = DetermineTurn(turn, firstAttack);
+                if (nowAttacking == "Dinosaurs") {
+                    herd.Attack();
                 }
-                Console.Clear();
-                DisplayStaging();
-                Console.ReadLine();
-                switch (firstAttack) {
-                    case 1:
-                        //herd attacks
-                        Console.Clear();
-                        DisplayStaging();
-                        //fleet attacks.
-                        turn++;
-                        break;
-                    case 2:
-                        //fleet attacks
-                        Console.Clear();
-                        DisplayStaging();
-                        //herd attacks
-                        turn++;
-                        break;
+                else if (nowAttacking == "Robots") {
+                    fleet.Attack();
                 }
+                turn++;
             }
             DisplayResultsModule();
+        }
+        //------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------
+        string DetermineTurn(int turn, int firstAttack)
+        {
+            if (firstAttack == 0)
+            {
+                if (turn % 2 == 0)
+                {
+                    return "Dinosaurs";
+                }
+                 return "Robots";    
+            }
+            else
+            {
+                if (turn % 2 == 0)
+                {
+                    return "Robots";
+                }
+                return "Dinosaurs";
+            }   
         }
 
         //------------------------------------------------------------------------------------

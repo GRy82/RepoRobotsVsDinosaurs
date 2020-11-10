@@ -19,6 +19,12 @@ namespace RobotsAndDinosaurs
             this.controller = controller;
         }
 
+
+        public void Attack()
+        {
+
+        }
+
         //If multiple dinosaurs of same type exist, eg. 3 T-Rexes, they'll be named T-Rex, T-Rex1, T-Rex2
         public void DetermineNames()
         {
