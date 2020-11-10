@@ -31,7 +31,7 @@ namespace RobotsAndDinosaurs
             }
         }
 
-        public void runBattle()
+        public void RunBattle()
         {
             Random rand = new Random();
             int firstAttack = rand.Next(1);
@@ -43,19 +43,20 @@ namespace RobotsAndDinosaurs
                 }
                 Console.Clear();
                 DisplayStaging();
+                Console.ReadLine();
                 switch (firstAttack) {
                     case 1:
-                        herd.Attack();
+                        //herd attacks
                         Console.Clear();
                         DisplayStaging();
-                        fleet.Attack();
+                        //fleet attacks.
                         turn++;
                         break;
                     case 2:
-                        fleet.Attack();
+                        //fleet attacks
                         Console.Clear();
                         DisplayStaging();
-                        herd.Attack();
+                        //herd attacks
                         turn++;
                         break;
                 }
@@ -70,9 +71,10 @@ namespace RobotsAndDinosaurs
         {
             //display team labels
             string characterSpaces = "              "; //14 spaces to allow for proper alignment.
-            Console.WriteLine(characterSpaces + leftTeam + characterSpaces + rightTeam);
+            string halfCharacterSpaces = "       ";
+            Console.WriteLine(characterSpaces + characterSpaces + leftTeam + characterSpaces + characterSpaces + rightTeam);
             //Display healthbars
-            Console.WriteLine(characterSpaces + characterSpaces + " Health Bars  ");
+            Console.WriteLine(characterSpaces + characterSpaces + characterSpaces + halfCharacterSpaces + " Health Bars  ");
             DisplayHealth();
 
             //display attributes: name, type, energy, attack power.
@@ -92,27 +94,31 @@ namespace RobotsAndDinosaurs
                 roboAttributes[2, i] = Convert.ToString(fleet.robotFleetList[i].powerLevel);
                 roboAttributes[3, i] = Convert.ToString(fleet.robotFleetList[i].weapon.attackPower);
             }
-            
-            for (int i = 0; i < 4; i++)
-            {
-                DisplayAttribute(dinoAttributes[i], roboAttributes[i]);
-            }
-        }
 
+            string[] attributeHeaders = new string[4] { "Name", "Weapon/type", "Energy", "Attack Power" };
+            
+            DisplayAttributes(attributeHeaders, dinoAttributes, roboAttributes);
+            
+        }
+        //Dinosaur herd  and robot fleet health bar creation and display.
         void DisplayHealth()
         {   //Dinosaur herd health bar creation
-            double health1 = herd.dinosaurHerdList[0].health;
-            double dinoHealthBars1 = Math.Round(health1 / 10);
-            double health2 = herd.dinosaurHerdList[1].health;
-            double dinoHealthBars2 = Math.Round(health2 / 10);
-            double health3 = herd.dinosaurHerdList[2].health;
-            double dinoHealthBars3 = Math.Round(health3 / 10);
+            //1 health bar will represent 1/10 of their health.
+            //Construct list of number of health bars foreach dinosaur.
+            List<double> dinoHealthBars = new List<double> { };
+            for (int l = 0; l < herd.dinosaurHerdList.Count; l++) {
+                double tenthOftotalHealth = herd.dinosaurHerdList[l].healthCapacity / 10;
+                double dinoHealthBar = herd.dinosaurHerdList[l].health / tenthOftotalHealth;
+                dinoHealthBar = Math.Round(dinoHealthBar);
+                dinoHealthBars.Add(dinoHealthBar);
+            }
+            //string to be added to and eventually printed.
             string dinosaurHealthString = null; 
-            List<double> dinoHealthBars = new List<double> { dinoHealthBars1, dinoHealthBars2, dinoHealthBars3};
+            //construct string.
             for (int i = 0; i < dinoHealthBars.Count; i++) {
                 double afterSpace = 10 - dinoHealthBars[i];
                 dinosaurHealthString += " |";
-                for (int j = 0; j < dinoHealthBars[j]; j++) {
+                for (int j = 0; j < dinoHealthBars[i]; j++) {
                     dinosaurHealthString += "=";
                 }
                 for (int k = 0; k < afterSpace; k++) {
@@ -120,20 +126,22 @@ namespace RobotsAndDinosaurs
                 }
                 dinosaurHealthString += "| ";
             }
-            //Robot fleed health bar creation
-            double healthR1 = fleet.robotFleetList[0].health;
-            double roboHealthBars1 = Math.Round(healthR1 / 10);
-            double healthR2 = fleet.robotFleetList[1].health;
-            double roboHealthBars2 = Math.Round(healthR2 / 10);
-            double healthR3 = fleet.robotFleetList[2].health;
-            double roboHealthBars3 = Math.Round(healthR3 / 10);
+            //Robot fleet health bar creation. Previous steps repeated.
+            List<double> roboHealthBars = new List<double> { };
+            for (int l = 0; l < fleet.robotFleetList.Count; l++)
+            {
+                double tenthOftotalHealth = 10;
+                double roboHealthBar = fleet.robotFleetList[l].health / tenthOftotalHealth;
+                roboHealthBar = Math.Round(roboHealthBar);
+                roboHealthBars.Add(roboHealthBar);
+            }
             string roboHealthString = null;
-            List<double> roboHealthBars = new List<double> { roboHealthBars1, roboHealthBars2, roboHealthBars3 };
+
             for (int i = 0; i < roboHealthBars.Count; i++)
             {
                 double afterSpace = 10 - roboHealthBars[i];
                 roboHealthString += " |";
-                for (int j = 0; j < roboHealthBars[j]; j++)
+                for (int j = 0; j < roboHealthBars[i]; j++)
                 {
                     roboHealthString += "=";
                 }
@@ -143,32 +151,30 @@ namespace RobotsAndDinosaurs
                 }
                 roboHealthString += "| ";
             }
-
-            OrderAndPrint(dinosaurHealthString, roboHealthString);
+            
+            OrderAndPrint("Health", dinosaurHealthString, roboHealthString);
         }
 
-
-        void DisplayAttribute(string[] dinoAttribute, string[] roboAttribute)
+        //Responsible for construting the strings for a row of a single attribute. 
+        void DisplayAttributes(string[] attributeHeaders, string[,] dinoAttribute, string[,] roboAttribute)
         {
-            string dinoNames = null;
-            for (int i = 0; i < fleet.robotFleetList.Count; i++)
-            {
-                dinoNames += Centering(fleet.robotFleetList[i].name);
+            for (int j = 0; j < 4; j++)
+            {//hard coded for the 4 different attributes displayed. This could change at some point
+                string dinoAttributeString = null;//Reset these at the start of each iteration of outer for-loop.
+                string roboAttributeString = null; 
+                for (int i = 0; i < herd.dinosaurHerdList.Count; i++)
+                {
+                    dinoAttributeString += Centering(dinoAttribute[j, i]); //add dino
+                }
+                for (int i = 0; i < fleet.robotFleetList.Count; i++)
+                {
+                    roboAttributeString += Centering(roboAttribute[j, i]);
+                }
+                OrderAndPrint(attributeHeaders[j], dinoAttributeString, roboAttributeString);
             }
-            string roboNames = null;
-            for (int i = 0; i < herd.dinosaurHerdList.Count; i++)
-            {
-                roboNames += Centering(herd.dinosaurHerdList[i].name);
-            }
-            OrderAndPrint(dinoNames, roboNames);
         }
-
-
-        void DisplayWeaponOrType()
-        {
-
-        }
-
+        //centers the attribute with the correct amount of spacing around so it can be 
+        //used to create oragnized table.
         string Centering(string initialString)
         {
             string newString = null;
@@ -194,9 +200,12 @@ namespace RobotsAndDinosaurs
             }
             return newString; 
         }
-
-        void OrderAndPrint(string stringDino, string stringRobo)
+        //Puts the strings together in single line. Whichever team represents the use gets placed 
+        //on the left half of the table.
+        void OrderAndPrint(string rowName, string stringDino, string stringRobo)
         {
+            rowName = Centering(rowName);
+            Console.Write(rowName);
             if (leftTeam == "Dinosaurs") {
                 Console.WriteLine(stringDino + stringRobo);
             }

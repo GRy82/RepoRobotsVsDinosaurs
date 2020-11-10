@@ -26,7 +26,7 @@ namespace RobotsAndDinosaurs
                     computerTypesOrWeapons = RandomTypeAssignment("Dinosaurs");
                 }
                 Battlefield battlefield = LoadObjects(chosenTeam, playerTypesOrWeapons, computerTypesOrWeapons);
-                battlefield.runBattle();
+                battlefield.RunBattle();
             }
         }
 
@@ -63,7 +63,7 @@ namespace RobotsAndDinosaurs
             Herd herd = new Herd(dinosaurList, dinosaursController);
 
             foreach (Dinosaur dinosaur in dinosaurList) {
-                dinosaur.name = herd.DetermineName(dinosaur);
+                dinosaur.name = herd.DetermineName(dinosaur); //assign dinosaurs names.
             }
 
             Battlefield battlefield = new Battlefield(herd, fleet);
@@ -72,7 +72,7 @@ namespace RobotsAndDinosaurs
 
         public static bool MainMenu()
         {
-            List<string> mainMenuList = new List<string> { "Start New Battle", "Exit Game" }; //main menu options stored as strings.
+            List<string> mainMenuList = new List<string> { "Start New Battle" }; //main menu options stored as strings.
             ConsoleOptionsInterface mainMenu = new ConsoleOptionsInterface(mainMenuList, true); //menu generated through this menu object.
             
             Console.WriteLine("Welcome to Robots And Dinosaurs! by GRy-Dev");
@@ -104,21 +104,21 @@ namespace RobotsAndDinosaurs
 
             List<string> dinoTypes = new List<string> { };
 
-            Console.WriteLine("Each the 3 dinosaurs in your herd requires a type to be selected.");
+            Console.WriteLine("Each of the 3 dinosaurs in your herd requires a type to be selected.");
             for (int i = 0; i < 3; i++)
             {
-                Console.WriteLine("Choose type for dinosaur #" + i + 1);
+                Console.WriteLine("Choose type for dinosaur #" + (i + 1));
                 int dinoTypeChoice = dinoTypesMenu.Launch();
                 switch (dinoTypeChoice)
                 {
                     case 1:
-                        dinoTypes[i] = "T-Rex";
+                        dinoTypes.Add("T-Rex");
                         break;
                     case 2:
-                        dinoTypes[i] = "Velociraptor";
+                        dinoTypes.Add("Velociraptor");
                         break;
                     case 3:
-                        dinoTypes[i] = "Brachiosaurus";
+                        dinoTypes.Add("Brachiosaurus");
                         break;
                 }
             }
@@ -138,13 +138,13 @@ namespace RobotsAndDinosaurs
                 int weaponChoice = roboTypesMenu.Launch();
                 switch (weaponChoice) {
                     case 1:
-                        roboWeapons[i] = "Energy Sword";
+                        roboWeapons.Add("Energy Sword");
                         break;
                     case 2:
-                        roboWeapons[i] = "Laser Gun";
+                        roboWeapons.Add("Laser Gun");
                         break;
                     case 3:
-                        roboWeapons[i] = "Self-Destruct Switch";
+                        roboWeapons.Add("Self-Destruct");
                         break;
                 }
             }
@@ -163,7 +163,7 @@ namespace RobotsAndDinosaurs
             }
             else
             {
-                randomTypes = new List<string> { "Energy Sword", "Laser Gun", "Self-Destruct Switch" };
+                randomTypes = new List<string> { "Energy Sword", "Laser Gun", "Self-Destruct" };
             }
             for (int i = 0; i < 3; i++)
             {

@@ -19,9 +19,6 @@ namespace RobotsAndDinosaurs
             this.controller = controller;
         }
 
-        public Attack()
-        {
-
-        }
+        
     }
 }

@@ -10,6 +10,7 @@ namespace RobotsAndDinosaurs
     {
         public string type;
         public int health;
+        public int healthCapacity;
         public int energy;
         public int attackPower;
         public string name;
@@ -21,28 +22,24 @@ namespace RobotsAndDinosaurs
             this.type = type;
             switch (this.type) {
                 case "T-Rex":
-                    this.health = 100;
+                    this.healthCapacity = 100;
                     this.attackPower = 20;
                     break;
                 case "Velociraptor":
-                    this.health = 60;
+                    this.healthCapacity = 60;
                     this.attackPower = 50;
                     break;
-                case "Bronchiosaurus":
-                    this.health = 150;
+                case "Brachiosaurus":
+                    this.healthCapacity = 150;
                     this.attackPower = 10;
                     break;
             }
+            
+            this.health = this.healthCapacity;
         }
 
-        string DetermineName()
-        {
-            return
-        }
+      
 
-        Attack()
-        {
-
-        }
+       
     }
 }
