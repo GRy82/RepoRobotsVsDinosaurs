@@ -39,7 +39,7 @@ namespace RobotsAndDinosaurs
             foreach (Robot robot in fleet.robotFleetList)
             {
                 if (robot.health > 0) {
-                    totalLiving++;
+                    totalLiving++;//establishes how many there are to pick from, if you need to randomize.
                     if (robot.health < leastHealth)
                     {
                         leastHealth = robot.health;
@@ -94,6 +94,10 @@ namespace RobotsAndDinosaurs
             while (dinosaurHerdList[dinosaurIndex].health <= 0)
             {
                 dinosaurIndex++;
+                if (dinosaurIndex >= dinosaurHerdList.Count)
+                {
+                    dinosaurIndex = 0;
+                }
             }
             return dinosaurHerdList[dinosaurIndex];
         }
@@ -110,10 +114,10 @@ namespace RobotsAndDinosaurs
                 }
             }
             livingMembers[Target].health -= incomingDamage;
-            if (livingMembers[Target].health < 0)
-            {
+            if (livingMembers[Target].health < 0) {
                 livingMembers[Target].health = 0;
                 livingMembersCount -= 1;
+                Console.WriteLine(livingMembers[Target].name + " has been killed.\n");
             }
             PrintAttackResult(incomingDamage, livingMembers[Target].name);
         }

@@ -94,6 +94,10 @@ namespace RobotsAndDinosaurs
             while (robotFleetList[robotIndex].health <= 0)
             {
                 robotIndex++;
+                if (robotIndex >= robotFleetList.Count)
+                {
+                    robotIndex = 0;
+                }
             }
             return robotFleetList[robotIndex];
         }
@@ -113,6 +117,7 @@ namespace RobotsAndDinosaurs
             if (livingMembers[Target].health < 0) {
                 livingMembers[Target].health = 0;
                 livingMembersCount -= 1;
+                Console.WriteLine(livingMembers[Target].name + " has been killed.\n");
             }
             PrintAttackResult(incomingDamage, livingMembers[Target].name);
         }

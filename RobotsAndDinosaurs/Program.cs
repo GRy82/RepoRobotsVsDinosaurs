@@ -86,7 +86,7 @@ namespace RobotsAndDinosaurs
             List<string> sidesList = new List<string> { "Dinosaurs", "Robots" }; //menu options stored as strings.
             ConsoleOptionsInterface sidesMenu = new ConsoleOptionsInterface(sidesList, false); //menu generated through this menu object.
 
-            Console.WriteLine("Choose what side of the war you will join!");
+            Console.WriteLine("\nChoose what side of the war you will join!");
             int numericTeam = sidesMenu.Launch();
             string teamName = "Dinosaurs";
             if (numericTeam == 2) {
