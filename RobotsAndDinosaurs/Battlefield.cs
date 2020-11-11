@@ -78,12 +78,15 @@ namespace RobotsAndDinosaurs
         //Display functions.
         void DisplayStaging()
         {
+            //create top table border
+            for (int i = 0; i < 14; i++) {
+                Console.Write("_______");//7 underscores per segment
+            }
+            Console.Write("_\n");
             //display team labels
             string characterSpaces = "              "; //14 spaces to allow for proper alignment.
-            string halfCharacterSpaces = "       ";
-            Console.WriteLine(characterSpaces + characterSpaces + leftTeam + characterSpaces + characterSpaces + rightTeam);
+            Console.WriteLine("|" + characterSpaces + characterSpaces + leftTeam + characterSpaces + characterSpaces + rightTeam + characterSpaces + "|");
             //Display healthbars
-            Console.WriteLine(characterSpaces + characterSpaces + characterSpaces + halfCharacterSpaces + " Health Bars  ");
             DisplayHealth();
 
             //display attributes: name, type, energy, attack power.
@@ -107,8 +110,14 @@ namespace RobotsAndDinosaurs
             string[] attributeHeaders = new string[4] { "Name", "Weapon/type", "Energy", "Attack Power" };
             
             DisplayAttributes(attributeHeaders, dinoAttributes, roboAttributes);
-            Console.WriteLine("\n");
-            
+            //create bottom table border
+            Console.Write("|");
+            for (int i = 0; i < 14; i++)
+            {
+                Console.Write("_______");//7 underscores per segment
+            }
+            Console.Write("|\n");
+            Console.WriteLine("\n"); 
         }
         //Dinosaur herd  and robot fleet health bar creation and display.
         void DisplayHealth()
@@ -126,7 +135,7 @@ namespace RobotsAndDinosaurs
                 dinoHealthBar = Math.Round(dinoHealthBar);
                 dinoHealthBars.Add(dinoHealthBar);
             }
-            //string to be added to and eventually printed.
+            //string to be added to and later printed.
             string dinosaurHealthString = null; 
             //construct string.
             for (int i = 0; i < dinoHealthBars.Count; i++) {           
@@ -223,13 +232,15 @@ namespace RobotsAndDinosaurs
         void OrderAndPrint(string rowName, string stringDino, string stringRobo)
         {
             rowName = Centering(rowName);
+            Console.Write("|");
             Console.Write(rowName);
             if (herd.controller == "Human") {
-                Console.WriteLine(stringDino + stringRobo);
+                Console.Write(stringDino + stringRobo);
             }
             else {
-                Console.WriteLine(stringRobo + stringDino);
+                Console.Write(stringRobo + stringDino);
             }
+            Console.WriteLine("|");
         }
 
 
