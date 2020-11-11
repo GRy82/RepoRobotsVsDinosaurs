@@ -68,11 +68,11 @@ namespace RobotsAndDinosaurs
             double attackValue;
             Random randAttack = new Random();
             int randomSkill = randAttack.Next(10);
-            if (randomSkill >= 0 && randomSkill < 5) {
+            if (randomSkill >= 0 && randomSkill < 6) {
                 attackValue = attackPower;
                 energy -= 10;
             }
-            else if (randomSkill >= 5 && randomSkill < 7) {
+            else if (randomSkill >= 7 && randomSkill < 9) {
                 attackValue = attackPower * 1.2;
                 energy -= 15;
             }

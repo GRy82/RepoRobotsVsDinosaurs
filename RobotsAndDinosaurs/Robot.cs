@@ -27,16 +27,16 @@ namespace RobotsAndDinosaurs
 
         }
 
-        public double Attack()
+        public double Attack(Herd herd)
         {
             double attackValue;
             if (controller == "Human")
             {
                 int attackOption = SelectAttackMenu();
-                attackValue = SwitchAttack(attackOption);
+                attackValue = SwitchAttack(attackOption, herd);
             }
             else {
-                attackValue = RandomizeAttack();
+                attackValue = RandomizeAttack(herd);
             }
             Random randAttack = new Random();
             double randomDeviation = attackValue * .15;
@@ -47,24 +47,28 @@ namespace RobotsAndDinosaurs
             return resultantAttack;
         }
 
-        public double RandomizeAttack()
+        public double RandomizeAttack(Herd herd)
         {
             double attackValue;
             Random randAttack = new Random();
             int randomSkill = randAttack.Next(10);
-            if (randomSkill >= 0 && randomSkill < 5)
+            if (randomSkill >= 0 && randomSkill < 6)
             {
                 attackValue = weapon.attackPower;
                 powerLevel -= weapon.energyCost;
             }
-            else if (randomSkill >= 5 && randomSkill < 7)
+            else if (randomSkill >= 7 && randomSkill < 9)
             {
                 attackValue = 5;
             }
             else
             {
-                attackValue = 30;
-                health = 0
+                attackValue = 0;
+                health = 0;
+                foreach (Dinosaur dinosaur in herd.dinosaurHerdList)
+                {
+                    dinosaur.health -= 30;
+                }
             }
 
             double randomDeviation = .15 * attackValue;
@@ -82,10 +86,10 @@ namespace RobotsAndDinosaurs
             string destructCost = Centering("100 health");
             Console.WriteLine("______________________________________________");
             Console.WriteLine("| Attack Type  |  weapon dmg  | Cost(energy) |");
-            Console.WriteLine("|" + weaponType + damage + cost + "|");
+            Console.WriteLine("|" + weaponType +"|"+ damage + "|"+ cost + "|");
             Console.WriteLine("|     Melee    |" + meleeDamage + "|       0      |");
             Console.WriteLine("|Self-Destruct |" + selfDestructMessage + "|" + destructCost + "|");
-            Console.WriteLine("_______________|______________|______________|");
+            Console.WriteLine("|______________|______________|______________|");
 
         }
 
@@ -98,7 +102,7 @@ namespace RobotsAndDinosaurs
             return option;
         }
 
-        public double SwitchAttack(int attackOption)
+        public double SwitchAttack(int attackOption, Herd herd)
         {
             switch (attackOption)
             {
@@ -109,7 +113,16 @@ namespace RobotsAndDinosaurs
                     return weapon.meleeDamage;                   
                 case 3:
                     health = 0;
-                    return 30;
+                    foreach (Dinosaur dinosaur in herd.dinosaurHerdList)
+                    {
+                        dinosaur.health -= 30;
+                        if(dinosaur.health <= 0)
+                        {
+                            dinosaur.health = 0;
+                            herd.livingMembersCount -= 1;
+                        }
+                    }
+                    return 0;
                 default:
                     return 0;
             }

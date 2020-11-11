@@ -35,7 +35,7 @@ namespace RobotsAndDinosaurs
         {
             Printing printing = new Printing(this);
             Random rand = new Random();
-            int firstAttack = rand.Next(1);//Randomizes who attacks first.
+            int firstAttack = rand.Next(2);//Randomizes who attacks first.
             string lastAttacking = "Dinosaurs";
             if (firstAttack == 0) {
                 lastAttacking = "Robots"; //Dinos go first
@@ -67,7 +67,7 @@ namespace RobotsAndDinosaurs
                         Console.ReadLine();
                         target = fleet.AutomatedTargetSelection(herd);
                     }
-                    double attack = fleet.Attack(target);
+                    double attack = fleet.Attack(target, herd);
                     herd.TakeDamage(attack, target);
                     lastAttacking = "Robots";
                 }

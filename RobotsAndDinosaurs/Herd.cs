@@ -124,8 +124,18 @@ namespace RobotsAndDinosaurs
                 livingMembersCount -= 1;
                 newDeath = true;
             }
+            if (incomingDamage != 0)  {
+                PrintAttackResult(incomingDamage, livingMembers[Target].name, newDeath);
+            }
+            else {
+                Console.Clear();
+                Console.Write("\n\nSelf-Destruct was used. The herd was attacked for 30 damage each.  ");
+                if (newDeath == true)  {
+                    Console.WriteLine("Dinosaur life was lost.");
+                }
+                Console.WriteLine("\n");
+            }
 
-            PrintAttackResult(incomingDamage, livingMembers[Target].name, newDeath);
         }
 
         public void PrintAttackResult(double damageDone, string targetName, bool newDeath)

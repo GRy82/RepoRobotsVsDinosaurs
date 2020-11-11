@@ -64,16 +64,19 @@ namespace ProblemSolving1
         }
         //-------------------------------------------------------------------------------------
         bool CheckValidity()
-        {    
+        {
+            if (inputString == "") {
+                return false;
+            }
             for (int i = 0; i < inputString.Length; i++)
             {
                 char charac = inputString[i];
                 //boolean conditions
                 bool acceptedChar = (charac > 47 && charac < 58) || charac == 46;
-                bool unacceptableDecimal = (charac == 46 && i != inputString.Length - 1);
+                bool unacceptableDecimal = ((charac == 46 && i != inputString.Length - 1) || (charac == 46 && i ==0));
                 //input can be in any number in the form "1" or "1." with unlimited number of digits.
                 //as long as number input does not exceed number of options.
-                if (unacceptableDecimal || !acceptedChar) {
+                if (unacceptableDecimal || !acceptedChar || inputString == "") {
                     return false;
                 }
             }

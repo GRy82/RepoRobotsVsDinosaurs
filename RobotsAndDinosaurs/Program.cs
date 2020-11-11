@@ -26,6 +26,7 @@ namespace RobotsAndDinosaurs
                     computerTypesOrWeapons = RandomTypeAssignment("Dinosaurs");
                 }
                 Battlefield battlefield = LoadObjects(chosenTeam, playerTypesOrWeapons, computerTypesOrWeapons);
+                Console.Clear();
                 battlefield.RunBattle();
             }
         }

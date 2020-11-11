@@ -57,7 +57,7 @@ namespace RobotsAndDinosaurs
                 Console.Write("_______");//7 underscores per segment
             }
             Console.Write("|\n");
-            Console.WriteLine("\n");
+            Console.WriteLine("");
         }
         //Dinosaur herd  and robot fleet health bar creation and display.
         public void DisplayHealth()
@@ -197,12 +197,16 @@ namespace RobotsAndDinosaurs
         {
             string winningTeam = "Dinosaurs";
             string extraPhrase = "For the dinosaurs, it was a walk in the jurassic park. The robots will require expensive repairs.\n\n";
-            if (battlefield.herd.livingMembersCount == 0)
+            if (battlefield.herd.livingMembersCount == 0 && battlefield.fleet.livingMembersCount > 0)
             {
                 winningTeam = "Robots";
                 extraPhrase = "Look at them all doing 'The Robot' and 'The Robo-boogie' while the losing team nurses their dino-sores.\n\n";
             }
-            Console.WriteLine("\nThe winning team is the " + winningTeam + "!!!\n");
+            else if (battlefield.herd.livingMembersCount == 0 && battlefield.fleet.livingMembersCount == 0){
+                winningTeam = "no one in particular";
+                extraPhrase = "Congratulations. Everyone has perished. It's a war... what did you expect?";
+            }
+            Console.WriteLine("\nThe winning team is: " + winningTeam + "!!!\n");
             Console.WriteLine(extraPhrase);
 
             Console.WriteLine("Press 'enter' to continue...");

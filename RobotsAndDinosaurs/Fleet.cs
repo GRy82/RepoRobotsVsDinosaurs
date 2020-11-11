@@ -22,9 +22,9 @@ namespace RobotsAndDinosaurs
             this.currentAttacker = robotFleetList[robotFleetList.Count - 1];
         }
 
-        public double Attack(int opponentSelected)
+        public double Attack(int opponentSelected, Herd herd)
         {
-            double attack = currentAttacker.Attack();
+            double attack = currentAttacker.Attack(herd);
             return attack;
         }
 
@@ -123,7 +123,8 @@ namespace RobotsAndDinosaurs
                 livingMembersCount -= 1;
                 newDeath = true;
             }
-            PrintAttackResult(incomingDamage, livingMembers[Target].name, newDeath);
+
+                PrintAttackResult(incomingDamage, livingMembers[Target].name, newDeath);
         }
         
         public void PrintAttackResult(double damageDone, string targetName, bool newDeath)
