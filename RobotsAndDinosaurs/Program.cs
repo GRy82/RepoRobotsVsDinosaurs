@@ -97,8 +97,8 @@ namespace RobotsAndDinosaurs
             return teamName;
         }
 
-        public static List<string> DinosaurTypeSelection()
-        {
+        public static List<string> DinosaurTypeSelection()//Velociraptor has highest attack power. Brachiosaurus has greatest amount fo health.
+        {                                                   //T-Rex is balanced.
             List<string> dinoTypesMenuList = new List<string> { "T-Rex", "Velociraptor", "Brachiosaurus" }; //menu options stored as strings.
             ConsoleOptionsInterface dinoTypesMenu = new ConsoleOptionsInterface(dinoTypesMenuList, false); //menu generated through this menu object.
 
@@ -125,8 +125,8 @@ namespace RobotsAndDinosaurs
             return dinoTypes;
         }
 
-        public static List<string> RobotWeaponSelection()
-        {
+        public static List<string> RobotWeaponSelection() //Flame thrower has greatest attack power, but powerLevel cost is commensurate.
+        {                                                   //All weapons have melee attack available that does not use energy.
             List<string> roboTypesMenuList = new List<string> { "Energy Sword", "Laser Gun", "Flame Thrower" }; //menu options stored as strings.
             ConsoleOptionsInterface roboTypesMenu = new ConsoleOptionsInterface(roboTypesMenuList, false); //menu generated through this menu object.
 
