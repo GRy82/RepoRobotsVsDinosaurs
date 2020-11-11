@@ -65,6 +65,7 @@ namespace RobotsAndDinosaurs
             herd.DetermineNames(); //assign dinosaurs names.
 
             Battlefield battlefield = new Battlefield(herd, fleet);
+
             return battlefield;
         }
 

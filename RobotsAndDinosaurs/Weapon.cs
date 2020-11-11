@@ -10,18 +10,24 @@ namespace RobotsAndDinosaurs
     {
         public string type;
         public int attackPower;
+        public int energyCost;
+        public int meleeDamage = 5;
+
         public Weapon(string type)
         {
             this.type = type;
             switch (this.type) {
                 case "Laser Gun":
                     this.attackPower = 10;
+                    this.energyCost = 5;
                     break;
                 case "Energy Sword":
                     this.attackPower = 20;
+                    this.energyCost = 10;
                     break;
                 case "Flame Thrower":
                     this.attackPower = 40;
+                    this.energyCost = 20;
                     break;
             }
         }
