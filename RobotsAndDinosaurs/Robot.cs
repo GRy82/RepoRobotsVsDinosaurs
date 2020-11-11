@@ -22,6 +22,7 @@ namespace RobotsAndDinosaurs
             this.health = 100;
             this.healthCapacity = 100;
             this.name = name;
+
         }
 
         public double Attack()
@@ -43,12 +44,16 @@ namespace RobotsAndDinosaurs
             string weaponType = Centering(weapon.type);
             string damage = Centering(Convert.ToString(weapon.attackPower));
             string cost = Centering(Convert.ToString(weapon.energyCost));
-            
-            Console.WriteLine(" Attack Type  |  weapon dmg  | Cost(energy) ");
-            Console.WriteLine(weaponType + damage + cost);
-            Console.WriteLine("");
+            string meleeDamage = Centering(Convert.ToString(weapon.meleeDamage));
+            string selfDestructMessage = Centering("30 per dino");
+            string destructCost = Centering("100 health");
+            Console.WriteLine("______________________________________________");
+            Console.WriteLine("| Attack Type  |  weapon dmg  | Cost(energy) |");
+            Console.WriteLine("|" + weaponType + damage + cost + "|");
+            Console.WriteLine("|     Melee    |" + meleeDamage + "|       0      |");
+            Console.WriteLine("|Self-Destruct |" + selfDestructMessage + "|" + destructCost + "|");
+            Console.WriteLine("_______________|______________|______________|");
 
-            
         }
 
         public string Centering(string initialString)
