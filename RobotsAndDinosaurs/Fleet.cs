@@ -126,7 +126,7 @@ namespace RobotsAndDinosaurs
         public void PrintAttackResult(double damageDone, string targetName, bool newDeath)
         {
             Console.Clear();
-            Console.Write(targetName+ " was attacked for " + damageDone+ " damage.  ");
+            Console.Write("\n\n" + targetName+ " was attacked for " + damageDone+ " damage.  ");
             if (newDeath == true) {
                 Console.WriteLine(targetName + " has been killed.");
             }

@@ -51,13 +51,15 @@ namespace ProblemSolving1
             while (counter < printedOptions) 
             {
                 Console.Write(Convert.ToString(counter + 1) + ". ");
-                Console.Write(optionsMenu[counter] + "\n");
+                Console.WriteLine(optionsMenu[counter]);
                 counter++;
             }
             //End with an option to exit if preferred.
             if (includeExitOption) {
-                Console.WriteLine(Convert.ToString(counter + 1) + ". Exit program\n");
+                Console.WriteLine(Convert.ToString(counter + 1) + ". Exit program");
             }
+            //leave extra space between options and input.
+            Console.Write("\n");
             return;
         }
         //-------------------------------------------------------------------------------------

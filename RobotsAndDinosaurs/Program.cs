@@ -73,7 +73,7 @@ namespace RobotsAndDinosaurs
             List<string> mainMenuList = new List<string> { "Start New Battle" }; //main menu options stored as strings.
             ConsoleOptionsInterface mainMenu = new ConsoleOptionsInterface(mainMenuList, true); //menu generated through this menu object.
             
-            Console.WriteLine("Welcome to Robots And Dinosaurs! by GRy-Dev");
+            Console.WriteLine("\n\nWelcome to Robots And Dinosaurs! by GRy-Dev");
             int optionNumber = mainMenu.Launch();
             if (optionNumber == 1) {
                 return true;
@@ -102,10 +102,10 @@ namespace RobotsAndDinosaurs
 
             List<string> dinoTypes = new List<string> { };
 
-            Console.WriteLine("Each of the 3 dinosaurs in your herd requires a type to be selected.");
+            Console.WriteLine("\nEach of the 3 dinosaurs in your herd requires a type to be selected.");
             for (int i = 0; i < 3; i++)
             {
-                Console.WriteLine("Choose type for dinosaur #" + (i + 1));
+                Console.WriteLine("\nChoose type for dinosaur #" + (i + 1));
                 int dinoTypeChoice = dinoTypesMenu.Launch();
                 switch (dinoTypeChoice)
                 {
@@ -130,9 +130,9 @@ namespace RobotsAndDinosaurs
 
             List<string> roboWeapons = new List<string> { };
 
-            Console.WriteLine("Each the 3 robots in your fleet requires a weapon.");
+            Console.WriteLine("\nEach of the 3 robots in your fleet requires a weapon.");
             for (int i = 0; i < 3; i++) {
-                Console.WriteLine("Choose weapon for Robot #" + (i + 1));
+                Console.WriteLine("\nChoose weapon for Robot #" + (i + 1));
                 int weaponChoice = roboTypesMenu.Launch();
                 switch (weaponChoice) {
                     case 1:
