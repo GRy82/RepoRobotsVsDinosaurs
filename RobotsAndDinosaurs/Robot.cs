@@ -27,14 +27,13 @@ namespace RobotsAndDinosaurs
 
         public double Attack()
         {
-            DisplayAttackTypes();
             int attackOption = SelectAttackMenu();
-            double attackValue;
+            double attackValue = SwitchAttack(attackOption);
             Random randAttack = new Random();
-            double randomDeviation = weapon.attackPower * .15;
+            double randomDeviation = attackValue * .15;
             randomDeviation = Math.Round(randomDeviation);
-            int lowerLimit = Convert.ToInt32(weapon.attackPower - randomDeviation);
-            int upperLimit = Convert.ToInt32(weapon.attackPower + randomDeviation);
+            int lowerLimit = Convert.ToInt32(attackValue - randomDeviation);
+            int upperLimit = Convert.ToInt32(attackValue + randomDeviation);
             double resultantAttack = randAttack.Next(lowerLimit, upperLimit);
             return resultantAttack;
         }
@@ -54,6 +53,30 @@ namespace RobotsAndDinosaurs
             Console.WriteLine("|Self-Destruct |" + selfDestructMessage + "|" + destructCost + "|");
             Console.WriteLine("_______________|______________|______________|");
 
+        }
+
+        public int SelectAttackMenu()
+        {
+            List<string> attackOptions = new List<string> { "Weapon attack", "Melee attack", "Self-Destruct"};
+            ConsoleOptionsInterface attackMenu = new ConsoleOptionsInterface(attackOptions, false);
+            Console.WriteLine("\nChoose how to attack.");
+            int option = attackMenu.Launch();
+            return option;
+        }
+
+        public double SwitchAttack(int attackOption)
+        {
+            switch (attackOption)
+            {
+                case 1:
+                    return weapon.attackPower;                  
+                case 2:
+                    return weapon.meleeDamage;                   
+                case 3:
+                    return 30;
+                default:
+                    return 0;
+            }
         }
 
         public string Centering(string initialString)
@@ -83,14 +106,6 @@ namespace RobotsAndDinosaurs
             }
             return newString;
         }
-
-        public int SelectAttackMenu()
-        {
-            ConsoleOptionsInterface attackMenu = new ConsoleOptionsInterface(weapon.type);
-        }
-
-
-
 
     }
 }
