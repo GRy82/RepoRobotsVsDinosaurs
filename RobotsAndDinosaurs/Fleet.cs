@@ -30,6 +30,7 @@ namespace RobotsAndDinosaurs
 
         public int AutomatedTargetSelection(Herd herd)
         {
+            currentAttacker = DetermineAttacker(robotFleetList.IndexOf(currentAttacker));
             Random rand = new Random();
             double leastHealth = 100;
             Dinosaur target;
@@ -114,7 +115,7 @@ namespace RobotsAndDinosaurs
                 }
             }
             livingMembers[Target].health -= incomingDamage;
-            if (livingMembers[Target].health < 0) {
+            if (livingMembers[Target].health <= 0) {
                 livingMembers[Target].health = 0;
                 livingMembersCount -= 1;
                 newDeath = true;
@@ -125,10 +126,11 @@ namespace RobotsAndDinosaurs
         public void PrintAttackResult(double damageDone, string targetName, bool newDeath)
         {
             Console.Clear();
-            Console.WriteLine(targetName+ " was attacked for " + damageDone+ " damage\n");
+            Console.Write(targetName+ " was attacked for " + damageDone+ " damage.  ");
             if (newDeath == true) {
-                Console.WriteLine(targetName + " has been killed.\n\n");
+                Console.WriteLine(targetName + " has been killed.");
             }
+            Console.WriteLine("\n");
         }
     }
 }

@@ -243,7 +243,7 @@ namespace RobotsAndDinosaurs
                 winningTeam = "Robots";
                 extraPhrase = "Look at them all doing 'The Robot' and 'The Robo-boogie' while the losing team nurses their dino-sores.\n\n";
             }
-            Console.WriteLine("The winning team is the " + winningTeam + "\n");
+            Console.WriteLine("\nThe winning team is the " + winningTeam + "!!!\n");
             Console.WriteLine(extraPhrase);
 
             Console.WriteLine("Press 'enter' to continue...");
