@@ -69,7 +69,8 @@ namespace RobotsAndDinosaurs
             {
                 double tenthOftotalHealth = battlefield.herd.dinosaurHerdList[l].healthCapacity / 10;
                 double dinoHealthBar = battlefield.herd.dinosaurHerdList[l].health / tenthOftotalHealth;
-                if (battlefield.herd.dinosaurHerdList[l].health < 5 && battlefield.herd.dinosaurHerdList[l].health > 0)
+                if (battlefield.herd.dinosaurHerdList[l].health < (battlefield.herd.dinosaurHerdList[l].healthCapacity / 20) 
+                    && battlefield.herd.dinosaurHerdList[l].health > 0)
                 {
                     dinoHealthBar = 1;
                 }
@@ -99,7 +100,8 @@ namespace RobotsAndDinosaurs
             {
                 double tenthOftotalHealth = 10;
                 double roboHealthBar = battlefield.fleet.robotFleetList[l].health / tenthOftotalHealth;
-                if (battlefield.fleet.robotFleetList[l].health < 5 && battlefield.fleet.robotFleetList[l].health > 0)
+                if (battlefield.fleet.robotFleetList[l].health < (battlefield.fleet.robotFleetList[l].healthCapacity / 20)
+                    && battlefield.fleet.robotFleetList[l].health > 0)
                 {
                     roboHealthBar = 1;
                 }

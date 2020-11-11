@@ -115,11 +115,13 @@ namespace RobotsAndDinosaurs
                     health = 0;
                     foreach (Dinosaur dinosaur in herd.dinosaurHerdList)
                     {
-                        dinosaur.health -= 30;
-                        if(dinosaur.health <= 0)
-                        {
-                            dinosaur.health = 0;
-                            herd.livingMembersCount -= 1;
+                        if (dinosaur.health > 0) {
+                            dinosaur.health -= 30;
+                            if (dinosaur.health <= 0)
+                            {
+                                dinosaur.health = 0;
+                                herd.livingMembersCount -= 1;
+                            }
                         }
                     }
                     return 0;

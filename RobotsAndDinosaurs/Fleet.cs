@@ -117,6 +117,11 @@ namespace RobotsAndDinosaurs
                     livingMembers.Add(robot);
                 }
             }
+            if (livingMembers.Count <= 0)//Use this to prevent index out of range, if all robots are dead.
+            {
+                livingMembersCount = 0;
+                return;
+            }
             livingMembers[Target].health -= incomingDamage;
             if (livingMembers[Target].health <= 0) {
                 livingMembers[Target].health = 0;

@@ -108,31 +108,30 @@ namespace RobotsAndDinosaurs
 
         public void TakeDamage(double incomingDamage, int Target)
         {
-            List<Dinosaur> livingMembers = new List<Dinosaur>{ };
-            Target -= 1;
-            bool newDeath = false;
-            foreach (Dinosaur dinosaur in dinosaurHerdList)
+            if (incomingDamage != 0)//if regular singular directed damage comes in.
             {
-                if (dinosaur.health > 0)
+                List<Dinosaur> livingMembers = new List<Dinosaur>{ };
+                Target -= 1;
+                bool newDeath = false;
+                foreach (Dinosaur dinosaur in dinosaurHerdList)
                 {
-                    livingMembers.Add(dinosaur);
+                    if (dinosaur.health > 0)
+                    {
+                        livingMembers.Add(dinosaur);
+                    }
                 }
-            }
-            livingMembers[Target].health -= incomingDamage;
-            if (livingMembers[Target].health <= 0) {
-                livingMembers[Target].health = 0;
-                livingMembersCount -= 1;
-                newDeath = true;
-            }
-            if (incomingDamage != 0)  {
+                livingMembers[Target].health -= incomingDamage;
+                if (livingMembers[Target].health <= 0) {
+                    livingMembers[Target].health = 0;
+                    livingMembersCount -= 1;
+                    newDeath = true;
+                }
+
                 PrintAttackResult(incomingDamage, livingMembers[Target].name, newDeath);
             }
-            else {
+            else {//this is the corner case. The case where self-destruct was used.
                 Console.Clear();
-                Console.Write("\n\nSelf-Destruct was used. The herd was attacked for 30 damage each.  ");
-                if (newDeath == true)  {
-                    Console.WriteLine("Dinosaur life was lost.");
-                }
+                Console.Write("\n\nSelf-Destruct was used. The herd was attacked for 30 damage each.");
                 Console.WriteLine("\n");
             }
 
