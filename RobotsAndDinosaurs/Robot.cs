@@ -69,10 +69,12 @@ namespace RobotsAndDinosaurs
             switch (attackOption)
             {
                 case 1:
-                    return weapon.attackPower;                  
+                    powerLevel -= weapon.energyCost;
+                    return weapon.attackPower;  
                 case 2:
                     return weapon.meleeDamage;                   
                 case 3:
+                    health = 0;
                     return 30;
                 default:
                     return 0;

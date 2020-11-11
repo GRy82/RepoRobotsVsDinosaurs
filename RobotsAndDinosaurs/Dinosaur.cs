@@ -78,10 +78,13 @@ namespace RobotsAndDinosaurs
             switch (attackOption)
             {
                 case 1:
+                    energy -= 10;
                     return attackPower;
                 case 2:
+                    energy -= 15;
                     return attackPower * 1.2;
                 case 3:
+                    energy -= 20;
                     return attackPower * 1.4;
                 default:
                     return 0;
