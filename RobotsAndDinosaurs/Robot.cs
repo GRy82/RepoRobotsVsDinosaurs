@@ -27,16 +27,16 @@ namespace RobotsAndDinosaurs
 
         }
 
-        public double Attack(Herd herd)
+        public double Attack(Herd herd, Fleet fleet)
         {
             double attackValue;
             if (controller == "Human")
             {
                 int attackOption = SelectAttackMenu();
-                attackValue = SwitchAttack(attackOption, herd);
+                attackValue = SwitchAttack(attackOption, herd, fleet);
             }
             else {
-                attackValue = RandomizeAttack(herd);
+                attackValue = RandomizeAttack(herd, fleet);
             }
             Random randAttack = new Random();
             double randomDeviation = attackValue * .15;
@@ -47,7 +47,7 @@ namespace RobotsAndDinosaurs
             return resultantAttack;
         }
 
-        public double RandomizeAttack(Herd herd)
+        public double RandomizeAttack(Herd herd, Fleet fleet)
         {
             double attackValue;
             Random randAttack = new Random();
@@ -65,6 +65,7 @@ namespace RobotsAndDinosaurs
             {
                 attackValue = 0;
                 health = 0;
+                fleet.livingMembersCount -= 1;
                 foreach (Dinosaur dinosaur in herd.dinosaurHerdList)
                 {
                     dinosaur.health -= 30;
@@ -102,7 +103,7 @@ namespace RobotsAndDinosaurs
             return option;
         }
 
-        public double SwitchAttack(int attackOption, Herd herd)
+        public double SwitchAttack(int attackOption, Herd herd, Fleet fleet)
         {
             switch (attackOption)
             {
@@ -113,6 +114,7 @@ namespace RobotsAndDinosaurs
                     return weapon.meleeDamage;                   
                 case 3:
                     health = 0;
+                    fleet.livingMembersCount -= 1;
                     foreach (Dinosaur dinosaur in herd.dinosaurHerdList)
                     {
                         if (dinosaur.health > 0) {

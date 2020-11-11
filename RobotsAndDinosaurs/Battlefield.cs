@@ -67,7 +67,7 @@ namespace RobotsAndDinosaurs
                         Console.ReadLine();
                         target = fleet.AutomatedTargetSelection(herd);
                     }
-                    double attack = fleet.Attack(target, herd);
+                    double attack = fleet.Attack(target, herd, fleet);
                     herd.TakeDamage(attack, target);
                     lastAttacking = "Robots";
                 }

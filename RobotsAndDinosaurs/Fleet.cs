@@ -22,9 +22,9 @@ namespace RobotsAndDinosaurs
             this.currentAttacker = robotFleetList[robotFleetList.Count - 1];
         }
 
-        public double Attack(int opponentSelected, Herd herd)
+        public double Attack(int opponentSelected, Herd herd, Fleet fleet)
         {
-            double attack = currentAttacker.Attack(herd);
+            double attack = currentAttacker.Attack(herd, fleet);
             return attack;
         }
 
