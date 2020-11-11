@@ -49,14 +49,14 @@ namespace RobotsAndDinosaurs
             Weapon weaponTwo = new Weapon(weaponTypes[1]);
             Weapon weaponThree = new Weapon(weaponTypes[2]);
 
-            Robot robotOne = new Robot(mana, weaponOne, "ModelA");
-            Robot robotTwo = new Robot(mana, weaponTwo, "ModelB");
-            Robot robotThree = new Robot(mana, weaponThree, "ModelC");
+            Robot robotOne = new Robot(mana, weaponOne, "ModelA", robotsController);
+            Robot robotTwo = new Robot(mana, weaponTwo, "ModelB", robotsController);
+            Robot robotThree = new Robot(mana, weaponThree, "ModelC", robotsController);
             List<Robot> robotList = new List<Robot> { robotOne, robotTwo, robotThree };
 
-            Dinosaur dinosaurOne = new Dinosaur(mana, dinosaurTypes[0]);
-            Dinosaur dinosaurTwo = new Dinosaur(mana, dinosaurTypes[1]);
-            Dinosaur dinosaurThree = new Dinosaur(mana, dinosaurTypes[2]);
+            Dinosaur dinosaurOne = new Dinosaur(mana, dinosaurTypes[0], dinosaursController);
+            Dinosaur dinosaurTwo = new Dinosaur(mana, dinosaurTypes[1], dinosaursController);
+            Dinosaur dinosaurThree = new Dinosaur(mana, dinosaurTypes[2], dinosaursController);
             List<Dinosaur> dinosaurList = new List<Dinosaur> { dinosaurOne, dinosaurTwo, dinosaurThree };
 
             Fleet fleet = new Fleet(robotList, robotsController);

@@ -14,21 +14,30 @@ namespace RobotsAndDinosaurs
         public double healthCapacity;
         public double powerLevel;
         public Weapon weapon;
+        public string controller;
 
-        public Robot(int powerLevel, Weapon weapon, string name)
+        public Robot(int powerLevel, Weapon weapon, string name, string controller)
         {
             this.powerLevel = powerLevel;
             this.weapon = weapon;
             this.health = 100;
             this.healthCapacity = 100;
             this.name = name;
+            this.controller = controller;
 
         }
 
         public double Attack()
         {
-            int attackOption = SelectAttackMenu();
-            double attackValue = SwitchAttack(attackOption);
+            double attackValue;
+            if (controller == "Human")
+            {
+                int attackOption = SelectAttackMenu();
+                attackValue = SwitchAttack(attackOption);
+            }
+            else {
+                attackValue = RandomizeAttack();
+            }
             Random randAttack = new Random();
             double randomDeviation = attackValue * .15;
             randomDeviation = Math.Round(randomDeviation);
@@ -36,6 +45,31 @@ namespace RobotsAndDinosaurs
             int upperLimit = Convert.ToInt32(attackValue + randomDeviation);
             double resultantAttack = randAttack.Next(lowerLimit, upperLimit);
             return resultantAttack;
+        }
+
+        public double RandomizeAttack()
+        {
+            double attackValue;
+            Random randAttack = new Random();
+            int randomSkill = randAttack.Next(10);
+            if (randomSkill >= 0 && randomSkill < 5)
+            {
+                attackValue = weapon.attackPower;
+                powerLevel -= weapon.energyCost;
+            }
+            else if (randomSkill >= 5 && randomSkill < 7)
+            {
+                attackValue = 5;
+            }
+            else
+            {
+                attackValue = 30;
+                health = 0
+            }
+
+            double randomDeviation = .15 * attackValue;
+            attackValue = randAttack.Next(Convert.ToInt32(attackValue - randomDeviation), Convert.ToInt32(attackValue + randomDeviation));
+            return attackValue;
         }
 
         public void DisplayAttackTypes()

@@ -64,6 +64,9 @@ namespace RobotsAndDinosaurs
         {
             currentAttacker = DetermineAttacker(dinosaurHerdList.IndexOf(currentAttacker));
             Console.WriteLine("It is now " + currentAttacker.name + "'s turn to attack. Choose their target.");
+            if (controller == "Human") {
+                currentAttacker.DisplayAttackTypes();
+            }
             List<string> opponentNames = GetRobotNames(fleet);
             ConsoleOptionsInterface targetsMenu = new ConsoleOptionsInterface(opponentNames, false);
             int opponentSelected = targetsMenu.Launch();
